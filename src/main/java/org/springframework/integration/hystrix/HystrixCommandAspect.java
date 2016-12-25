@@ -28,6 +28,8 @@ public class HystrixCommandAspect {
 			//主要作用就是将方法和方法上面的注解进行融合，产生断点配置。
 			return getHystrixCommand(joinPoint, cb).execute();
 		} catch (HystrixRuntimeException e) {
+
+			//将主线的异常根据注解的配置进行降级或者是其他的一些操作。
 			return ExceptionUtil.handleException(e, joinPoint, cb);
 		}
 	}
@@ -46,6 +48,9 @@ public class HystrixCommandAspect {
 
 					//从这里可以看出就是这个方法的内部包装了 实际执行的方法
 					return joinPoint.proceed();
+
+
+				//这个方法仍然是往外抛出异常的。
 				} catch (Exception e) {
 					throw e;
 				} catch (Throwable e) {
