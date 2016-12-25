@@ -1,5 +1,15 @@
 #说明
+1.
 用HystrixCommandTest 这个类当做controller去调用serviceImpl类,然而在servcieImpl上面是添加了熔断逻辑的。
+
+2.
+关于降级操作是利用反射直接调用某一个类的某一个方法，这个方法是定义在
+@HystrixCommand(fallbackMethod = "fallbackWithException")
+这个注解上面的。
+
+3.
+hystrix的初始化是在aspect里面进行初始化的。
+
 
 
 
