@@ -9,14 +9,14 @@ public class HystrixCommandServiceImpl implements Service {
 	public static final int TEST_TIMEOUT = 2000;
 
 	/**
-	 * 
-	 * 
-	 * �����̳߳ش�С,Ĭ��ֵ10��. ����ֵ:����߷�ʱ99.5%��ƽ����Ӧʱ�� + ����Ԥ��һЩ����
+	 *
+	 *
+	 * 配置线程池大小,默认值10个. 建议值:请求高峰时99.5%的平均响应时间 + 向上预留一些即可
 	 *
 	 * HystrixThreadPoolProperties.Setter().withCoreSize(int value)
-	 * �����߳�ֵ�ȴ����г���,Ĭ��ֵ:-1 ����ֵ:-1��ʾ���ȴ�ֱ�Ӿܾ�,���Ա����̳߳�ʹ��ֱ�Ӿ�������+
-	 * ���ʴ�С�ķǻ����̳߳�Ч�����.���Բ������޸Ĵ�ֵ��
-	 * ��ʹ�÷ǻ����̳߳�ʱ��queueSizeRejectionThreshold,keepAliveTimeMinutes ������Ч
+	 * 配置线程值等待队列长度,默认值:-1 建议值:-1表示不等待直接拒绝,测试表明线程池使用直接决绝策略+
+	 * 合适大小的非回缩线程池效率最高.所以不建议修改此值。
+	 * 当使用非回缩线程池时，queueSizeRejectionThreshold,keepAliveTimeMinutes 参数无效
 	 * HystrixThreadPoolProperties.Setter().withMaxQueueSize(int value)
 	 */
 	@Override
