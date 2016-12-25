@@ -19,7 +19,7 @@ import java.util.concurrent.TimeoutException;
 @Component
 public class HystrixCommandAspect {
 
-	//这个是切面的入口操作
+	//这个是切面的入口操作，只要是带有这个注解的，都会产生作用。
 	@Around("@annotation(com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand)")
 	public Object circuitBreakerAround(final ProceedingJoinPoint joinPoint) throws Throwable {
 		com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand cb = AnnotationUtil.getAnnotation(joinPoint);
