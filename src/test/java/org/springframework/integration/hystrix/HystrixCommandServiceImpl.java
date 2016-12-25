@@ -11,12 +11,12 @@ public class HystrixCommandServiceImpl implements Service {
 	/**
 	 * 
 	 * 
-	 * ÅäÖÃÏß³Ì³Ø´óĞ¡,Ä¬ÈÏÖµ10¸ö. ½¨ÒéÖµ:ÇëÇó¸ß·åÊ±99.5%µÄÆ½¾ùÏìÓ¦Ê±¼ä + ÏòÉÏÔ¤ÁôÒ»Ğ©¼´¿É
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì³Ø´ï¿½Ğ¡,Ä¬ï¿½ï¿½Öµ10ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½Öµ:ï¿½ï¿½ï¿½ï¿½ß·ï¿½Ê±99.5%ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½Ó¦Ê±ï¿½ï¿½ + ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½Ò»Ğ©ï¿½ï¿½ï¿½ï¿½
 	 *
 	 * HystrixThreadPoolProperties.Setter().withCoreSize(int value)
-	 * ÅäÖÃÏß³ÌÖµµÈ´ı¶ÓÁĞ³¤¶È,Ä¬ÈÏÖµ:-1 ½¨ÒéÖµ:-1±íÊ¾²»µÈ´ıÖ±½Ó¾Ü¾ø,²âÊÔ±íÃ÷Ïß³Ì³ØÊ¹ÓÃÖ±½Ó¾ö¾ø²ßÂÔ+
-	 * ºÏÊÊ´óĞ¡µÄ·Ç»ØËõÏß³Ì³ØĞ§ÂÊ×î¸ß.ËùÒÔ²»½¨ÒéĞŞ¸Ä´ËÖµ¡£
-	 * µ±Ê¹ÓÃ·Ç»ØËõÏß³Ì³ØÊ±£¬queueSizeRejectionThreshold,keepAliveTimeMinutes ²ÎÊıÎŞĞ§
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½Öµï¿½È´ï¿½ï¿½ï¿½ï¿½Ğ³ï¿½ï¿½ï¿½,Ä¬ï¿½ï¿½Öµ:-1 ï¿½ï¿½ï¿½ï¿½Öµ:-1ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½È´ï¿½Ö±ï¿½Ó¾Ü¾ï¿½,ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ß³Ì³ï¿½Ê¹ï¿½ï¿½Ö±ï¿½Ó¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+
+	 * ï¿½ï¿½ï¿½Ê´ï¿½Ğ¡ï¿½Ä·Ç»ï¿½ï¿½ï¿½ï¿½ß³Ì³ï¿½Ğ§ï¿½ï¿½ï¿½ï¿½ï¿½.ï¿½ï¿½ï¿½Ô²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ş¸Ä´ï¿½Öµï¿½ï¿½
+	 * ï¿½ï¿½Ê¹ï¿½Ã·Ç»ï¿½ï¿½ï¿½ï¿½ß³Ì³ï¿½Ê±ï¿½ï¿½queueSizeRejectionThreshold,keepAliveTimeMinutes ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§
 	 * HystrixThreadPoolProperties.Setter().withMaxQueueSize(int value)
 	 */
 	@Override
@@ -32,6 +32,8 @@ public class HystrixCommandServiceImpl implements Service {
 		throw new MyException();
 	}
 
+
+	//è¶…æ—¶çš„æ–¹æ³•
 	@Override
 	@HystrixCommand(commandProperties = {
 			@HystrixProperty(name = "executionTimeoutInMilliseconds", value = TEST_TIMEOUT + "") })
@@ -42,7 +44,6 @@ public class HystrixCommandServiceImpl implements Service {
 		}
 		return str;
 	}
-
 	@Override
 	@HystrixCommand(commandProperties = { @HystrixProperty(name = "executionTimeoutInMilliseconds", value = "0") })
 	public String withZeroTimeout(String str) {
@@ -53,35 +54,37 @@ public class HystrixCommandServiceImpl implements Service {
 		return str;
 	}
 
+
+	//è¿™ä¸¤ä¸ªæ˜¯éš”ç¦»æ–¹æ³•çš„æµ‹è¯•ï¼Œåˆ°åº•æ˜¯çº¿ç¨‹æ± éš”ç¦»è¿˜æ˜¯ä¿¡å·é‡éš”ç¦»
 	@Override
-	// executionIsolationStrategy
 	@HystrixCommand(commandProperties = { @HystrixProperty(name = "executionIsolationStrategy", value = "THREAD") })
 	public int getThreadId() {
 		return Thread.currentThread().hashCode();
 	}
-
 	@Override
 	@HystrixCommand(commandProperties = { @HystrixProperty(name = "executionIsolationStrategy.", value = "SEMAPHORE") })
 	public int getNonThreadedThreadThreadId() {
 		return Thread.currentThread().hashCode();
 	}
 
+
+	//é™çº§çš„æ–¹æ³•
 	@Override
 	@HystrixCommand(fallbackMethod = "fallback")
 	public String exceptionWithFallback(String s) {
 		throw new MyRuntimeException();
 	}
-
-	public String fallback(String s) {
-		return s;
-	}
-
 	@Override
 	@HystrixCommand(fallbackMethod = "fallbackWithException")
 	public Throwable exceptionWithFallbackIncludingException(String testStr) {
 		throw new MyRuntimeException();
 	}
 
+
+	//å®é™…æ‰§è¡Œçš„è®²è§£çš„æ–¹æ³•ï¼Œå°†ä¼šé€šè¿‡åå°„è°ƒç”¨ã€‚
+	public String fallback(String s) {
+		return s;
+	}
 	public Throwable fallbackWithException(String testStr, Throwable t) {
 		return t;
 	}
