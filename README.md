@@ -82,13 +82,14 @@ private final HystrixProperty requestLogEnabled;
 //是否开启请求缓存,默认:true
 private final HystrixProperty requestCacheEnabled; // Whether request caching is enabled.
 
-####2):熔断器（Circuit Breaker）配置 Circuit Breaker配置源码在HystrixCommandProperties,构造Command时通过Setter进行配置,每种依赖使用一个Circuit Breaker Java代码 收藏代码 // 熔断器在整个统计时间内是否开启的阀值，默认20秒。也就是10秒钟内至少请求20次，熔断器才发挥起作用
+####2):熔断器（Circuit Breaker）
+配置 Circuit Breaker配置源码在HystrixCommandProperties,构造Command时通过Setter进行配置,每种依赖使用一个Circuit Breaker Java代码 收藏代码 // 熔断器在整个统计时间内是否开启的阀值，默认20秒。也就是10秒钟内至少请求20次，熔断器才发挥起作用
 private final HystrixProperty circuitBreakerRequestVolumeThreshold;
 
 //熔断器默认工作时间,默认:5秒.熔断器中断请求5秒后会进入半打开状态,放部分流量过去重试
 private final HystrixProperty circuitBreakerSleepWindowInMilliseconds;
 
-//是否启用熔断器,默认true. 启动
+//是否启用熔断器,默认true.
 private final HystrixProperty circuitBreakerEnabled;
 
 //默认:50%。当出错率超过50%后熔断器启动.
