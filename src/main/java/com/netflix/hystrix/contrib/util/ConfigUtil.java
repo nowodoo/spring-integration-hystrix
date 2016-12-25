@@ -60,8 +60,7 @@ public class ConfigUtil {
      * @param cb
      * @return
      */
-    public static HystrixCommand.Setter getCommandSetter(ProceedingJoinPoint joinPoint,
-                                                   com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand cb) {
+    public static HystrixCommand.Setter getCommandSetter(ProceedingJoinPoint joinPoint, com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand cb) {
 
         //这里取出相应的配置名称
         String name = ConfigUtil.getHystrixGroupName(joinPoint, cb);
