@@ -31,12 +31,15 @@ public class HystrixCommandAspect {
 
 
 	//这里是执行command命令的地方，主要的切入点
-	private HystrixCommand<?> getHystrixCommand(final ProceedingJoinPoint joinPoint,
-			com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand cb)
-			throws NoSuchMethodException, SecurityException {
+	private HystrixCommand<?> getHystrixCommand(final ProceedingJoinPoint joinPoint, com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand cb) throws NoSuchMethodException, SecurityException {
 
+		//获取需要的配置
+		HystrixCommand.Setter setter = ConfigUtil.getCommandSetter(joinPoint, cb);
+
+
+		//用上面的配置去建立真正的执行策略，超时，异常等等
 		@SuppressWarnings("rawtypes")
-		HystrixCommand<?> theCommand = new HystrixCommand(ConfigUtil.getCommandSetter(joinPoint, cb)) {
+		HystrixCommand<?> theCommand = new HystrixCommand(setter) {
 			@Override
 			protected Object run() throws Exception {
 				try {

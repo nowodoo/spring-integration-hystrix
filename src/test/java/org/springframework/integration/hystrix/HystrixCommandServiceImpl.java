@@ -35,9 +35,17 @@ public class HystrixCommandServiceImpl implements Service {
 
 	//超时的方法
 	@Override
-	@HystrixCommand(commandProperties = {
-			@HystrixProperty(name = "executionTimeoutInMilliseconds", value = TEST_TIMEOUT + "") })
+	@HystrixCommand(commandProperties = {@HystrixProperty(name = "executionTimeoutInMilliseconds", value = TEST_TIMEOUT + "") })
 	public String withTimeout(String str) {
+		try {
+			Thread.sleep(2 * TEST_TIMEOUT);
+		} catch (InterruptedException e) {
+		}
+		return str;
+	}
+	@Override
+	@HystrixCommand(commandProperties = {@HystrixProperty(name = "executionTimeoutInMilliseconds", value = TEST_TIMEOUT + "") }, fallbackMethod = "fallbackWithException")
+	public String withTimeoutAndFallback(String str) {
 		try {
 			Thread.sleep(2 * TEST_TIMEOUT);
 		} catch (InterruptedException e) {
@@ -55,12 +63,14 @@ public class HystrixCommandServiceImpl implements Service {
 	}
 
 
+
 	//这两个是隔离方法的测试，到底是线程池隔离还是信号量隔离
 	@Override
 	@HystrixCommand(commandProperties = { @HystrixProperty(name = "executionIsolationStrategy", value = "THREAD") })
 	public int getThreadId() {
 		return Thread.currentThread().hashCode();
 	}
+
 	@Override
 	@HystrixCommand(commandProperties = { @HystrixProperty(name = "executionIsolationStrategy.", value = "SEMAPHORE") })
 	public int getNonThreadedThreadThreadId() {
@@ -83,9 +93,11 @@ public class HystrixCommandServiceImpl implements Service {
 
 	//实际执行的讲解的方法，将会通过反射调用。
 	public String fallback(String s) {
+		System.out.println("enter fallbackMethod:" + "fallback(String s)");
 		return s;
 	}
 	public Throwable fallbackWithException(String testStr, Throwable t) {
+		System.out.println("enter fallbackMethod:" + "fallbackWithException(String testStr, Throwable t)");
 		return t;
 	}
 }
