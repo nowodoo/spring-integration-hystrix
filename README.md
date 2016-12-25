@@ -10,6 +10,12 @@
 3.
 hystrix的初始化是在aspect里面进行初始化的。
 
+4.
+流程介绍：
+注意HystrixCommandAspect里面的getHystrixCommand()方法，实际就是包裹了执行的方法，
+然后用getCommandSetter()这个方法获取实际的配置。
+这些配置来自方法上面的注解
+
 
 
 

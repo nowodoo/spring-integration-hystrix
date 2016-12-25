@@ -82,6 +82,7 @@ public class HystrixCommandAspect {
 		return m.invoke(joinPoint.getTarget(), args);
 	}
 
+	//这里是执行command命令的地方
 	private HystrixCommand<?> getHystrixCommand(final ProceedingJoinPoint joinPoint,
 			com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand cb)
 			throws NoSuchMethodException, SecurityException {
@@ -91,6 +92,8 @@ public class HystrixCommandAspect {
 			@Override
 			protected Object run() throws Exception {
 				try {
+
+					//从这里可以看出就是这个方法的内部包装了 实际执行的方法
 					return joinPoint.proceed();
 				} catch (Exception e) {
 					throw e;
@@ -133,28 +136,30 @@ public class HystrixCommandAspect {
 	 */
 	private HystrixCommand.Setter getCommandSetter(ProceedingJoinPoint joinPoint,
 			com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand cb) {
+
+		//这里取出相应的配置名称
 		String name = getHystrixGroupName(joinPoint, cb);
 		String groupKey = StringUtils.isEmpty(cb.groupKey()) ? name : cb.groupKey();
 		String commandKey = StringUtils.isEmpty(cb.commandKey()) ? name : cb.commandKey();
-		HystrixThreadPoolKey hystrixThreadPoolKey = StringUtils.isEmpty(cb.threadPoolKey()) ? null
-				: HystrixThreadPoolKey.Factory.asKey(cb.threadPoolKey());
-
+		HystrixThreadPoolKey hystrixThreadPoolKey = StringUtils.isEmpty(cb.threadPoolKey()) ? null : HystrixThreadPoolKey.Factory.asKey(cb.threadPoolKey());
 		HystrixCommandProperties.Setter commandPropertiesDefaults = getHystrixCommandPropertiesSetter(cb);
-
 		HystrixThreadPoolProperties.Setter threadPoolPropertiesDefaults = getHystrixThreadPoolPropertiesSetter(cb);
 
+
+		//这里实际的配置对象
 		return HystrixCommand.Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey(groupKey))
 				.andCommandKey(HystrixCommandKey.Factory.asKey(commandKey)).andThreadPoolKey(hystrixThreadPoolKey)
 				.andCommandPropertiesDefaults(commandPropertiesDefaults)
 				.andThreadPoolPropertiesDefaults(threadPoolPropertiesDefaults);
 	}
 
+
+	//下面这三项是用来辅助提取配置文件的，是辅助方法。
 	private String getHystrixGroupName(final ProceedingJoinPoint joinPoint,
 			com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand cb) {
 		String name = cb.groupKey().length() == 0 ? cb.commandKey() : cb.groupKey();
 		return name.length() == 0 ? joinPoint.getSignature().toShortString() : name;
 	}
-
 	private HystrixCommandProperties.Setter getHystrixCommandPropertiesSetter(
 			com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand hystrixCommand) {
 		HystrixCommandProperties.Setter commandPropertiesDefaults = HystrixCommandProperties.defaultSetter();
@@ -171,7 +176,6 @@ public class HystrixCommandAspect {
 		}
 		return commandPropertiesDefaults;
 	}
-
 	private HystrixThreadPoolProperties.Setter getHystrixThreadPoolPropertiesSetter(
 			com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand hystrixCommand) {
 		HystrixThreadPoolProperties.Setter commandPropertiesDefaults = HystrixThreadPoolProperties.defaultSetter();
