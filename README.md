@@ -1,3 +1,8 @@
+#è¯´æ˜
+ç”¨HystrixCommandTest è¿™ä¸ªç±»å½“åšcontrollerå»è°ƒç”¨serviceImplç±»,ç„¶è€Œåœ¨servcieImplä¸Šé¢æ˜¯æ·»åŠ äº†ç†”æ–­é€»è¾‘çš„ã€‚
+
+
+
 # CircuitBreaker
 An Spring AOP annotation HystrixCommand using the NetFlix Hystrix circuit breaker (https://github.com/Netflix/Hystrix)
 Use
@@ -33,74 +38,74 @@ Use
 
 </beans>
 
-###²ÎÊıÅäÖÃËµÃ÷
-1:Hystrix ÅäÖÃ
-1):Command ÅäÖÃ
-CommandÅäÖÃÔ´ÂëÔÚHystrixCommandProperties,¹¹ÔìCommandÊ±Í¨¹ıSetter½øĞĞÅäÖÃ
-¾ßÌåÅäÖÃ½âÊÍºÍÄ¬ÈÏÖµÈçÏÂ
-Java´úÂë  ÊÕ²Ø´úÂë
-//Ê¹ÓÃÃüÁîµ÷ÓÃ¸ôÀë·½Ê½,Ä¬ÈÏ:²ÉÓÃÏß³Ì¸ôÀë,ExecutionIsolationStrategy.THREAD  
+###ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+1:Hystrix ï¿½ï¿½ï¿½ï¿½
+1):Command ï¿½ï¿½ï¿½ï¿½
+Commandï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½HystrixCommandProperties,ï¿½ï¿½ï¿½ï¿½CommandÊ±Í¨ï¿½ï¿½Setterï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½Íºï¿½Ä¬ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½
+Javaï¿½ï¿½ï¿½ï¿½  ï¿½Õ²Ø´ï¿½ï¿½ï¿½
+//Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ë·½Ê½,Ä¬ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì¸ï¿½ï¿½ï¿½,ExecutionIsolationStrategy.THREAD  
 private final HystrixProperty<ExecutionIsolationStrategy> executionIsolationStrategy;   
-//Ê¹ÓÃÏß³Ì¸ôÀëÊ±£¬µ÷ÓÃ³¬Ê±Ê±¼ä£¬Ä¬ÈÏ:1Ãë  
+//Ê¹ï¿½ï¿½ï¿½ß³Ì¸ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ã³ï¿½Ê±Ê±ï¿½ä£¬Ä¬ï¿½ï¿½:1ï¿½ï¿½  
 private final HystrixProperty<Integer> executionIsolationThreadTimeoutInMilliseconds;   
-//Ïß³Ì³ØµÄkey,ÓÃÓÚ¾ö¶¨ÃüÁîÔÚÄÄ¸öÏß³Ì³ØÖ´ĞĞ  
+//ï¿½ß³Ì³Øµï¿½key,ï¿½ï¿½ï¿½Ú¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ß³Ì³ï¿½Ö´ï¿½ï¿½  
 private final HystrixProperty<String> executionIsolationThreadPoolKeyOverride;   
-//Ê¹ÓÃĞÅºÅÁ¿¸ôÀëÊ±£¬ÃüÁîµ÷ÓÃ×î´óµÄ²¢·¢Êı,Ä¬ÈÏ:10  
+//Ê¹ï¿½ï¿½ï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ï¿½ï¿½,Ä¬ï¿½ï¿½:10  
 private final HystrixProperty<Integer> executionIsolationSemaphoreMaxConcurrentRequests;  
-//Ê¹ÓÃĞÅºÅÁ¿¸ôÀëÊ±£¬ÃüÁîfallback(½µ¼¶)µ÷ÓÃ×î´óµÄ²¢·¢Êı,Ä¬ÈÏ:10  
+//Ê¹ï¿½ï¿½ï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½fallback(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ï¿½ï¿½,Ä¬ï¿½ï¿½:10  
 private final HystrixProperty<Integer> fallbackIsolationSemaphoreMaxConcurrentRequests;   
-//ÊÇ·ñ¿ªÆôfallback½µ¼¶²ßÂÔ Ä¬ÈÏ:true   
+//ï¿½Ç·ï¿½ï¿½ï¿½fallbackï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä¬ï¿½ï¿½:true   
 private final HystrixProperty<Boolean> fallbackEnabled;   
-// Ê¹ÓÃÏß³Ì¸ôÀëÊ±£¬ÊÇ·ñ¶ÔÃüÁîÖ´ĞĞ³¬Ê±µÄÏß³Ìµ÷ÓÃÖĞ¶Ï£¨Thread.interrupt()£©²Ù×÷.Ä¬ÈÏ:true  
+// Ê¹ï¿½ï¿½ï¿½ß³Ì¸ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ğ³ï¿½Ê±ï¿½ï¿½ï¿½ß³Ìµï¿½ï¿½ï¿½ï¿½Ğ¶Ï£ï¿½Thread.interrupt()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.Ä¬ï¿½ï¿½:true  
 private final HystrixProperty<Boolean> executionIsolationThreadInterruptOnTimeout;   
-// Í³¼Æ¹ö¶¯µÄÊ±¼ä´°¿Ú,Ä¬ÈÏ:5000ºÁÃëcircuitBreakerSleepWindowInMilliseconds  
+// Í³ï¿½Æ¹ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä´°ï¿½ï¿½,Ä¬ï¿½ï¿½:5000ï¿½ï¿½ï¿½ï¿½circuitBreakerSleepWindowInMilliseconds  
 private final HystrixProperty<Integer> metricsRollingStatisticalWindowInMilliseconds;  
-// Í³¼Æ´°¿ÚµÄBucketsµÄÊıÁ¿,Ä¬ÈÏ:10¸ö,Ã¿ÃëÒ»¸öBucketsÍ³¼Æ  
+// Í³ï¿½Æ´ï¿½ï¿½Úµï¿½Bucketsï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Ä¬ï¿½ï¿½:10ï¿½ï¿½,Ã¿ï¿½ï¿½Ò»ï¿½ï¿½BucketsÍ³ï¿½ï¿½  
 private final HystrixProperty<Integer> metricsRollingStatisticalWindowBuckets; // number of buckets in the statisticalWindow  
-//ÊÇ·ñ¿ªÆô¼à¿ØÍ³¼Æ¹¦ÄÜ,Ä¬ÈÏ:true  
+//ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í³ï¿½Æ¹ï¿½ï¿½ï¿½,Ä¬ï¿½ï¿½:true  
 private final HystrixProperty<Boolean> metricsRollingPercentileEnabled;   
-// ÊÇ·ñ¿ªÆôÇëÇóÈÕÖ¾,Ä¬ÈÏ:true  
+// ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾,Ä¬ï¿½ï¿½:true  
 private final HystrixProperty<Boolean> requestLogEnabled;   
-//ÊÇ·ñ¿ªÆôÇëÇó»º´æ,Ä¬ÈÏ:true  
+//ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó»º´ï¿½,Ä¬ï¿½ï¿½:true  
 private final HystrixProperty<Boolean> requestCacheEnabled; // Whether request caching is enabled.  
  
-2):ÈÛ¶ÏÆ÷£¨Circuit Breaker£©ÅäÖÃ
-Circuit BreakerÅäÖÃÔ´ÂëÔÚHystrixCommandProperties,¹¹ÔìCommandÊ±Í¨¹ıSetter½øĞĞÅäÖÃ,Ã¿ÖÖÒÀÀµÊ¹ÓÃÒ»¸öCircuit Breaker
-Java´úÂë  ÊÕ²Ø´úÂë
-// ÈÛ¶ÏÆ÷ÔÚÕû¸öÍ³¼ÆÊ±¼äÄÚÊÇ·ñ¿ªÆôµÄ·§Öµ£¬Ä¬ÈÏ20Ãë¡£Ò²¾ÍÊÇ10ÃëÖÓÄÚÖÁÉÙÇëÇó20´Î£¬ÈÛ¶ÏÆ÷²Å·¢»ÓÆğ×÷ÓÃ  
+2):ï¿½Û¶ï¿½ï¿½ï¿½ï¿½ï¿½Circuit Breakerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+Circuit Breakerï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½HystrixCommandProperties,ï¿½ï¿½ï¿½ï¿½CommandÊ±Í¨ï¿½ï¿½Setterï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Ò»ï¿½ï¿½Circuit Breaker
+Javaï¿½ï¿½ï¿½ï¿½  ï¿½Õ²Ø´ï¿½ï¿½ï¿½
+// ï¿½Û¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í³ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ä·ï¿½Öµï¿½ï¿½Ä¬ï¿½ï¿½20ï¿½ë¡£Ò²ï¿½ï¿½ï¿½ï¿½10ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½20ï¿½Î£ï¿½ï¿½Û¶ï¿½ï¿½ï¿½ï¿½Å·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
 private final HystrixProperty<Integer> circuitBreakerRequestVolumeThreshold;   
-//ÈÛ¶ÏÆ÷Ä¬ÈÏ¹¤×÷Ê±¼ä,Ä¬ÈÏ:5Ãë.ÈÛ¶ÏÆ÷ÖĞ¶ÏÇëÇó5Ãëºó»á½øÈë°ë´ò¿ª×´Ì¬,·Å²¿·ÖÁ÷Á¿¹ıÈ¥ÖØÊÔ  
+//ï¿½Û¶ï¿½ï¿½ï¿½Ä¬ï¿½Ï¹ï¿½ï¿½ï¿½Ê±ï¿½ï¿½,Ä¬ï¿½ï¿½:5ï¿½ï¿½.ï¿½Û¶ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½5ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬,ï¿½Å²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½  
 private final HystrixProperty<Integer> circuitBreakerSleepWindowInMilliseconds;   
-//ÊÇ·ñÆôÓÃÈÛ¶ÏÆ÷,Ä¬ÈÏtrue. Æô¶¯  
+//ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û¶ï¿½ï¿½ï¿½,Ä¬ï¿½ï¿½true. ï¿½ï¿½ï¿½ï¿½  
 private final HystrixProperty<Boolean> circuitBreakerEnabled;   
-//Ä¬ÈÏ:50%¡£µ±³ö´íÂÊ³¬¹ı50%ºóÈÛ¶ÏÆ÷Æô¶¯.  
+//Ä¬ï¿½ï¿½:50%ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê³ï¿½ï¿½ï¿½50%ï¿½ï¿½ï¿½Û¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.  
 private final HystrixProperty<Integer> circuitBreakerErrorThresholdPercentage;  
-//ÊÇ·ñÇ¿ÖÆ¿ªÆôÈÛ¶ÏÆ÷×è¶ÏËùÓĞÇëÇó,Ä¬ÈÏ:false,²»¿ªÆô  
+//ï¿½Ç·ï¿½Ç¿ï¿½Æ¿ï¿½ï¿½ï¿½ï¿½Û¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Ä¬ï¿½ï¿½:false,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
 private final HystrixProperty<Boolean> circuitBreakerForceOpen;   
-//ÊÇ·ñÔÊĞíÈÛ¶ÏÆ÷ºöÂÔ´íÎó,Ä¬ÈÏfalse, ²»¿ªÆô  
+//ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½,Ä¬ï¿½ï¿½false, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
 private final HystrixProperty<Boolean> circuitBreakerForceClosed;  
  
-3):ÃüÁîºÏ²¢(Collapser)ÅäÖÃ
-CommandÅäÖÃÔ´ÂëÔÚHystrixCollapserProperties,¹¹ÔìCollapserÊ±Í¨¹ıSetter½øĞĞÅäÖÃ
-Java´úÂë  ÊÕ²Ø´úÂë
-//ÇëÇóºÏ²¢ÊÇÔÊĞíµÄ×î´óÇëÇóÊı,Ä¬ÈÏ: Integer.MAX_VALUE  
+3):ï¿½ï¿½ï¿½ï¿½Ï²ï¿½(Collapser)ï¿½ï¿½ï¿½ï¿½
+Commandï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½HystrixCollapserProperties,ï¿½ï¿½ï¿½ï¿½CollapserÊ±Í¨ï¿½ï¿½Setterï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+Javaï¿½ï¿½ï¿½ï¿½  ï¿½Õ²Ø´ï¿½ï¿½ï¿½
+//ï¿½ï¿½ï¿½ï¿½Ï²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Ä¬ï¿½ï¿½: Integer.MAX_VALUE  
 private final HystrixProperty<Integer> maxRequestsInBatch;  
-//Åú´¦Àí¹ı³ÌÖĞÃ¿¸öÃüÁîÑÓ³ÙµÄÊ±¼ä,Ä¬ÈÏ:10ºÁÃë  
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó³Ùµï¿½Ê±ï¿½ï¿½,Ä¬ï¿½ï¿½:10ï¿½ï¿½ï¿½ï¿½  
 private final HystrixProperty<Integer> timerDelayInMilliseconds;  
-//Åú´¦Àí¹ı³ÌÖĞÊÇ·ñ¿ªÆôÇëÇó»º´æ,Ä¬ÈÏ:¿ªÆô  
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó»º´ï¿½,Ä¬ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½  
 private final HystrixProperty<Boolean> requestCacheEnabled;  
  
-4):Ïß³Ì³Ø(ThreadPool)ÅäÖÃ
-Java´úÂë  ÊÕ²Ø´úÂë
+4):ï¿½ß³Ì³ï¿½(ThreadPool)ï¿½ï¿½ï¿½ï¿½
+Javaï¿½ï¿½ï¿½ï¿½  ï¿½Õ²Ø´ï¿½ï¿½ï¿½
 /** 
-ÅäÖÃÏß³Ì³Ø´óĞ¡,Ä¬ÈÏÖµ10¸ö. 
-½¨ÒéÖµ:ÇëÇó¸ß·åÊ±99.5%µÄÆ½¾ùÏìÓ¦Ê±¼ä + ÏòÉÏÔ¤ÁôÒ»Ğ©¼´¿É 
+ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì³Ø´ï¿½Ğ¡,Ä¬ï¿½ï¿½Öµ10ï¿½ï¿½. 
+ï¿½ï¿½ï¿½ï¿½Öµ:ï¿½ï¿½ï¿½ï¿½ß·ï¿½Ê±99.5%ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½Ó¦Ê±ï¿½ï¿½ + ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½Ò»Ğ©ï¿½ï¿½ï¿½ï¿½ 
 */  
 HystrixThreadPoolProperties.Setter().withCoreSize(int value)  
 /** 
-ÅäÖÃÏß³ÌÖµµÈ´ı¶ÓÁĞ³¤¶È,Ä¬ÈÏÖµ:-1 
-½¨ÒéÖµ:-1±íÊ¾²»µÈ´ıÖ±½Ó¾Ü¾ø,²âÊÔ±íÃ÷Ïß³Ì³ØÊ¹ÓÃÖ±½Ó¾ö¾ø²ßÂÔ+ ºÏÊÊ´óĞ¡µÄ·Ç»ØËõÏß³Ì³ØĞ§ÂÊ×î¸ß.ËùÒÔ²»½¨ÒéĞŞ¸Ä´ËÖµ¡£ 
-µ±Ê¹ÓÃ·Ç»ØËõÏß³Ì³ØÊ±£¬queueSizeRejectionThreshold,keepAliveTimeMinutes ²ÎÊıÎŞĞ§ 
+ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½Öµï¿½È´ï¿½ï¿½ï¿½ï¿½Ğ³ï¿½ï¿½ï¿½,Ä¬ï¿½ï¿½Öµ:-1 
+ï¿½ï¿½ï¿½ï¿½Öµ:-1ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½È´ï¿½Ö±ï¿½Ó¾Ü¾ï¿½,ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ß³Ì³ï¿½Ê¹ï¿½ï¿½Ö±ï¿½Ó¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+ ï¿½ï¿½ï¿½Ê´ï¿½Ğ¡ï¿½Ä·Ç»ï¿½ï¿½ï¿½ï¿½ß³Ì³ï¿½Ğ§ï¿½ï¿½ï¿½ï¿½ï¿½.ï¿½ï¿½ï¿½Ô²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ş¸Ä´ï¿½Öµï¿½ï¿½ 
+ï¿½ï¿½Ê¹ï¿½Ã·Ç»ï¿½ï¿½ï¿½ï¿½ß³Ì³ï¿½Ê±ï¿½ï¿½queueSizeRejectionThreshold,keepAliveTimeMinutes ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§ 
 */  
 HystrixThreadPoolProperties.Setter().withMaxQueueSize(int value)  
 
